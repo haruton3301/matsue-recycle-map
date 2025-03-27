@@ -45,7 +45,9 @@ export const MapView = () => {
     return () => mapInstance.remove()
   }, [])
 
-  const handleSearch = async () => {
+  const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
     const response = await fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
         `松江市${searchQuery || "末次町"}`,
@@ -68,21 +70,23 @@ export const MapView = () => {
   return (
     <div>
       <div className="flex items-center mb-3">
-        <div className="flex-1 flex items-center gap-2">
-          <label className="input flex items-center max-w-[320px]">
-            松江市
-            <input
-              type="text"
-              className="grow"
-              placeholder="末次町"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </label>
-          <button className="btn" onClick={handleSearch}>
-            移動
-          </button>
-        </div>
+        <form onSubmit={handleSearch}>
+          <div className="flex-1 flex items-center gap-2">
+            <label className="input flex items-center max-w-[320px]">
+              松江市
+              <input
+                type="text"
+                className="grow"
+                placeholder="末次町"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </label>
+            <button type="submit" className="btn">
+              移動
+            </button>
+          </div>
+        </form>
       </div>
       <div
         ref={mapContainerRef}
