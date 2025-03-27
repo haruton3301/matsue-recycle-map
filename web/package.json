@@ -11,7 +11,10 @@
     "deploy": "firebase deploy --only hosting"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-language": "^1.0.1",
     "@tailwindcss/vite": "^4.0.17",
+    "daisyui": "^5.0.9",
+    "mapbox-gl": "^3.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",

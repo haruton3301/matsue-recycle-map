@@ -25,3 +25,7 @@ dist-ssr
 
 # Firebase
 .firebase
+
+# data
+/src/data/**/*
+!/src/data/.gitkeep

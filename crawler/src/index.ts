@@ -29,14 +29,19 @@ const main = async () => {
     const linksWithPlaces = await getContentLinks(townLink)
 
     // Step3
-    for (const { href, place } of linksWithPlaces) {
+    for (const { place, href } of linksWithPlaces) {
+      console.log(`${place}, ${href}`)
+
       const latLng = await getLatLngFromMap(href)
+
       if (latLng) {
         results.push({
           place,
           lat: latLng.lat,
           lng: latLng.lng,
         })
+      } else {
+        throw Error("Scraping latLng failed")
       }
     }
   }

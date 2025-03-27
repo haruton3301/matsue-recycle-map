@@ -35,12 +35,23 @@ export const getContentLinks = async (
   const links: LinkInfo[] = []
 
   $("#contents a").each((_, el) => {
-    const href = $(el).attr("href")
+    let href = $(el).attr("href")
     const place = $(el).text().trim()
 
-    if (href && href.includes("goo.gl/maps")) {
-      const absoluteUrl = new URL(href, url).href
-      links.push({ href: absoluteUrl, place })
+    if (href) {
+      const match = href.match(
+        /(goo\.gl\/maps\/[\w-]+|maps\.app\.goo\.gl\/[\w-]+)/,
+      )
+
+      if (match) {
+        href = `https://${match[0]}`
+      } else {
+        href = new URL(href, url).href
+      }
+
+      if (href.includes("goo.gl/maps") || href.includes("maps.app.goo.gl")) {
+        links.push({ href, place })
+      }
     }
   })
 
