@@ -29,3 +29,6 @@ dist-ssr
 # data
 /src/data/**/*
 !/src/data/.gitkeep
+
+# env
+.env
