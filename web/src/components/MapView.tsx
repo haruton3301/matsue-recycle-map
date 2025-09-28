@@ -33,6 +33,19 @@ export const MapView = () => {
     mapInstance.addControl(language)
     mapInstance.addControl(new mapboxgl.NavigationControl(), "top-right")
 
+    // 現在地機能を追加
+    mapInstance.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserHeading: true,
+        showAccuracyCircle: true
+      }),
+      "top-right"
+    )
+
     locationData.forEach((location: Location) => {
       new mapboxgl.Marker()
         .setLngLat([Number(location.lng), Number(location.lat)])
